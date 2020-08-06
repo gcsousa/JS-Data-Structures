@@ -25,7 +25,7 @@ HashTable.prototype.insert = function (key, value) {
     } else if (this.buckets[bucket].key === key) {
         this.buckets[bucket].value = value;
     } else {  // if the bucket already holds a node, traverse linked list until the end, place node there
-        let curNode = this.buckets;
+        let curNode = this.buckets[bucket];
         while (curNode.next) {
             if (curNode.next.key === key) {
                 curNode.next.value = value;
@@ -38,16 +38,41 @@ HashTable.prototype.insert = function (key, value) {
 
 }
 
+HashTable.prototype.get = function (key) {
+    let bucket = this.hash(key);
+    if (!this.buckets[bucket]) return null;
+    else {
+        let curNode = this.buckets[bucket];
+        while (curNode) {
+            if (curNode.key === key) return curNode.value;
+            curNode = curNode.next;
+        }
+        return null;
+    }
+}
 
-let myHT = new HashTable(30);
+HashTable.prototype.getAll = function () {
+    var tableArr = [];
+
+    for (var i = 0; i < this.numBuckets; i++) {
+        var curNode = this.buckets[i];
+
+        while (curNode) {
+            tableArr.push(curNode);
+            curNode = curNode.next;
+        }
+    }
+    return tableArr;
+}
+
+let myHT = new HashTable(20);
 //console.log(myHT);
-myHT.insert('Jed', 'jed@gmail.com');
-myHT.insert('Andrea', 'andrea@yahoo.com');
-myHT.insert('Emily', 'emilyscott@gmail.com');
-myHT.insert('Daniel', 'dantheman@itunes.com');
-myHT.insert('NuNu', 'nunu@mymail.com');
-myHT.insert('Maggie', 'maggie@gmail.com');
-myHT.insert('Martha', 'martha@warren.com');
-myHT.insert('Amos', 'amosscott@pgfd.gov');
-myHT.insert('Matt', 'matt@hilti.com');
-console.log(myHT.buckets);
+myHT.insert("a", 'jed@gmail.com');
+myHT.insert("b", '2@yahoo.com');
+myHT.insert("c", '3@yahoo.com');
+myHT.insert('Joe', 'joe@mymail.com');
+myHT.insert('jeo', 'jeo@news.com');
+
+console.log(myHT);
+
+console.log(myHT.getAll());//
