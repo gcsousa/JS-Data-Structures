@@ -11,6 +11,7 @@
     3. find
     4. forEach
     5. some
-    6. every
-    7. reduce
-    8. includes
+    6. slice
+    7. every
+    8. reduce
+    9. includes
