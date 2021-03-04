@@ -1,6 +1,6 @@
 # JS-Data-Structures
 
-## Topics covered during this review will be
+## Topics covered during this are
 
 - Linked Lists
 - Binary Trees
